@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./main.js" defer ></script>
+    <script src="./resume.js"></script>
+    <script src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.min.js"></script>
+    <title>Resume</title>
+</head>
+<body>
+    <!-- <form  action="/personalData" method="post" id="personalData">          -->
+    <form  method="post" id="personalData">
+
+        <fieldset>
+            <legend>Personal information</legend>
+            <div>
+                <label for="person_id">Resume ID</label>
+                <input type="text" name="personId" id="personId" readonly="true">
+            </div>
+            </div>
+                <input type="text" name="firstName" id="firstName" placeholder="Please enter your firstname" >
+            <div>
+            <div>
+                <input type="text" name="middleName" id="middleName" placeholder="Please enter your middlename" >
+            </div>
+            <div>
+                <input type="text" name="lastName " id="lastName" placeholder="Please enter your lastname" >
+            </div>
+            
+            <div>                
+                <input type="submit" value="Add person" id="submitPerson">
+            </div>
+        </fieldset>
+    </form>
+
+    <form action="/personTitle" method="post" id="personTitle">     
+
+        <fieldset>
+            <legend>List your professional title</legend>
+            <div>
+                <input type="integer" name="title_id" id="title_id" >
+            </div>
+            <div>
+                <input type="text" name="title " id="title" placeholder="Please enter your profession title" >
+            </div>
+            <button type="button" id="submitTitle">Add Title</button>
+        </fieldset>
+    </form>
+
+    <form action="/contactData" method="post" id="contactData">
+
+        <fieldset>
+            <legend>Contact details</legend>
+            <div>
+                <input type="text" name="address" id="address" placeholder="City, State, Zip code"> 
+            </div>
+            <div>
+                <label for="remote">Remote</label>
+                <select name="remote" id="remote">
+                    <option value="n/a">Are you open to remote? Please choose a value</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>                    
+                </select>
+            </div>
+            <div>
+                <label for="relocalization">Relocalization</label>
+                <select name="relocalization" id="relocalization">
+                    <option value="n/a">Are you open to relocalization? Please choose a value</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>                    
+                </select>
+            </div>
+            
+            <div>
+                <input type="text" name="email" id="email" placeholder="Please enter your email"> 
+            </div>
+            <div>
+                <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Please enter your phone number"> 
+            </div>
+            <button type="button" id="submitContact">Add contact</button>
+        </fieldset>
+        
+    </form>
+        
+    <form action="/personalLink" method="post" id="personalLink">
+
+        <fieldset >
+            <legend>Professional links (LinkedIn, GitHub etc.)</legend>
+            <div>
+                <input type="integer" name="link_id" id="link_id" >
+            </div>
+            <div>
+                <input type="text" name="urlname" id="urlname" placeholder="Please enter your url name"> 
+            </div>
+            <div>
+                <input type="text" name="url" id="url" placeholder="Please enter your url"> 
+            </div>
+            <button type="button" id="submit_link">Add link</button>
+        </fieldset>
+
+    </form>
+    
+    <form action="/resObjective" method="post" id="resObjective">
+
+        <fieldset >
+            <legend>Resume objective</legend>
+            
+            <div>
+                <textarea name="objective" id="objective" cols="30" rows="10" placeholder="please enter your objective here"></textarea>
+            </div>
+            
+            <button type="button" id="submit_objective">Add objective</button>
+        </fieldset>
+
+    </form>
+
+    <form action="/techSkills" method="post" id="techSkills">
+        
+        <fieldset >
+            <legend>Technical Skills</legend>
+            <div>
+                <input type="integer" name="tech_id" id="tech_id" >
+            </div>
+            <div>
+                <input type="text" name="technicalSkills" id="technicalSkills" placeholder="Please list your technical skills"> 
+            </div>
+            <button type="button" id="submit_tech">Add technical skills</button>
+            
+        </fieldset>
+    </form>
+
+    <form action="/marketSkills" method="post" id="marketSkills">
+        
+        <fieldset >
+            <legend>Marketable Skills</legend>
+            <div>
+                <input type="integer" name="market_id" id="market_id" >
+            </div>
+            <div>
+                <input type="text" name="marketableSkills" id="marketableSkills" placeholder="Please list your marketable kills"> 
+            </div>
+            <button type="button" id="submit_market">Add marketable skills</button>
+            
+        </fieldset>
+    </form>
+
+    <form action="/projects" method="post" id="projects">
+        <fieldset >
+            <legend>Technical Project Highlights</legend>
+            <div>
+                <input type="integer" name="project_id" id="project_id" >
+            </div>
+            <div>
+                <input type="text" name="projectRole" id="projectRole" placeholder="Please enter your role"> 
+            </div>
+            <div>
+                <input type="text" name="projectName" id="projectName" placeholder="Please enter project name"> 
+            </div>
+            <div>
+                <input type="text" name="projectLanguage" id="projectLanguage" placeholder="Please list languages used in project"> 
+            </div>
+            <div>
+                <input type="text" name="projectUrl" id="projectUrl" placeholder="Please enter project url"> 
+            </div>
+            <div>
+                <input type="text" name="projectHighlightOne" id="projectHighlightOne" placeholder="Please enter project highlights"> 
+            </div>
+            <div>
+                <input type="text" name="projectHighlightTwo" id="projectHighlightTwo" placeholder="Please enter project highlights"> 
+            </div>
+            <div>
+                <input type="text" name="projectHighlightThree" id="projectHighlightThree" placeholder="Please enter project highlights"> 
+            </div>
+
+            <button type="button" id="submit_project">Add projects</button>
+        </fieldset>
+
+    </form>
+
+    <form action="/work" method="post" id="work">
+        <fieldset >
+            <legend>Work Experience</legend>
+            <div>
+                <input type="integer" name="work_id" id="work_id" >
+            </div>
+            <div>
+                <input type="text" name="companyName" id="companyName" placeholder="Please enter your company"> 
+            </div>
+            <div>
+                <input type="text" name="companyCity" id="companyCity" placeholder="Please enter city of your company"> 
+            </div>
+            <div>
+                <input type="text" name="companyState" id="companyState" placeholder="Please enter state of your company "> 
+            </div>
+            <div>
+                <input type="text" name="positionInCompany" id="positionInCompany" placeholder="Please enter your position"> 
+            </div>
+            <div>
+                <input type="text" name="companyStartDate" id="companyStartDate" placeholder="Please start date (Month Year )"> 
+                <input type="text" name="companyEndDate" id="companyEndDate" placeholder="Please end date (Month Year )"> 
+            </div>
+            <div>
+                <input type="text" name="realizationInCompanyOne" id="realizationInCompanyOne" placeholder="Please enter your realization"> 
+            </div>
+            <div>
+                <input type="text" name="realizationInCompanyTwo" id="realizationInCompanyTwo" placeholder="Please enter your realization"> 
+            </div>
+            <div>
+                <input type="text" name="realizationInCompanyThree" id="realizationInCompanyThree" placeholder="Please enter your realization"> 
+            </div>
+    
+            <button type="button" id="submit_work">Add work</button>
+        </fieldset>
+    </form>
+    <div>
+        <button type="button" id="GenerateReusme">Generate Resume</button>
+
+    </div>    
+    
+    <div class="container"></div>
+</body>
+</html>
