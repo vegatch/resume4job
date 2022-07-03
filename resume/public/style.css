@@ -1,0 +1,103 @@
+
+
+.main{
+    width: 80vw;
+    background-color: aquamarine;
+    margin: 0 auto;
+    padding: 0 1rem;
+    height: 340vh;
+}
+.my-heading h1{
+    text-align: center;
+}
+.flex-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.7rem;
+}
+
+.formContainer{
+    display: block;
+    width: 49.3%;   
+
+}
+
+.formContainerExcep{
+    width: 100%;
+}
+
+
+textarea{
+    width: 99.5%;
+    margin: auto;
+}
+
+form input[type='text']
+,input[type='integer'] {
+    height: 1.3rem;
+    width: 98%;
+    margin: .2rem 0;    
+}
+
+form select{
+    height: 1.7rem;
+    margin: .2rem 0;
+}
+
+form select, input[type='text'] ,  input[type='integer'] {
+    padding: .3rem;
+}
+
+form{
+    height: 100%;
+}
+
+fieldset{
+    padding-bottom: .4rem ;
+    height: 100%;
+}
+
+form input[type='submit'] {
+    height: 1.8rem;
+    width: 10rem;
+    margin: .2rem 0;  
+    border-radius: 2rem;  
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+
+
+.flexHead{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.message {
+    color: blue;
+    text-align: center;
+    font-size: 1.1 rem;
+}
+
+.message {
+    display: none;
+  }
+  
+.message.show {
+    display: block;
+  }
+/* 
+form{
+    display: block;
+    background-color: aliceblue;
+}
+
+
+
+.container{
+    background-color: aqua;
+    
+} */

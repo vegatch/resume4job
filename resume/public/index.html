@@ -4,11 +4,420 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./main.js" defer ></script>
+    <!-- <script src="./resume.js"></script> -->
+    <script src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.min.js"></script>
+    <title>CV Generator</title>
 </head>
 <body>
-    <h1>USER DATA</h1>
-    <form action="/api/resume" method="post">
+    <div class="main">
+        <div class="my-heading"> 
+            <h1>Resume Generator for job seeker</h1>
+        </div>
+        <div class="flex-container">
+            <!-- Start -->
+                <div class="formContainer">
+                    <form  method="POST" id="personForm" >
+                        <fieldset>
+                            <legend>Personal information</legend>
+                            
+                    <button name="get" id="get"> GET</button>
+                    <button name="post" id="post"> POST</button>
+                            <div>
+                                <div>
+                                    <!-- <label for="person_id">Resume ID</label> -->
+                                    <input type="text" name="pId" id="pId" placeholder="enter ID" required>
+                                </div>
+                                </div>   
+                                    <input type="text" name="fName" id="fname" placeholder="Please enter your first name" required>                 
+                                    <input type="text" name="mName" id="middlename" placeholder="Please enter your middlename" required>
+                                    
+                                <div>
+                                <div>
+                                    <input type="text" name="lName" id="lastname" placeholder="Please enter your lastname" required>
+                                    <input type="text" name="cUser" id="createUser" placeholder="enter user" required>
+                                </div>
+                                <div>
+                                    <input type="submit" value="Add name" id="submitPerson">
+                                    <!-- <button type="button"submitPerson">Add name</button> -->
+                                    <p class="message">Data has been successfully submitted</p>
+                                </div>
+                            </div>                            
+                        </fieldset>
+                    </form>
+                
+                </div>
+            <!--  End  -->
+
+            <!-- Start -->
+                <div class="formContainer">
+                    <form method ="post" id="titleForm">   
+                        <fieldset>
+                            <legend>List your professional title</legend>
+                            <div class="flexHead">
+                                <div>
+                                    <input type="text" name="title_id" id="title_id" required>
+                                </div>
+                                <div>
+                                    <input type="text" name="pIdTitle" id="pIdTitle" placeholder="enter ID" required>
+                                </div>
+                                <div>
+                                    <input type="text" name="titleNum" id="titleNum" size="4">                                    
+                                </div>
+                            </div>                            
+                            <div>
+                                <input type="text" name="title" id="title" placeholder="enter tile" required>
+                            </div>
+                            <div>
+                                <input type="submit" value="Add title" id="titleSubmit">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            <!--  End  -->
+
+            
+        </div>
+        <!-- start -->
+        <div class="flex-container">
+            <!-- Start -->
+                <div class="formContainer">
+                    <form method="post" id="contactForm">
+                        <fieldset>
+                            <legend>Contact details</legend>
+                            <div class="flexHead">
+                                <div>
+                                    <input type="text" name="contactId" id="contactId" > 
+
+                                </div>
+                                <div>
+                                    <input type="text" name="pIdContact" id="pIdContact">
+                                    
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <input type="text" name="city" id="city" placeholder="city"> 
+                                <input type="text" name="state" id="state" placeholder="state"> 
+                                <input type="text" name="zcode" id="zcode" placeholder="zip code"> 
+                            </div>
+                            <div>
+                                <!-- <label for="remote">Remote</label> -->
+                                <select name="remote" id="remote">
+                                    <option value="n/a">Are you open to remote? </option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>                    
+                                </select>
+                            </div>
+                            <div>
+                                <!-- <label for="relocalization">Relocalization</label> -->
+                                <select name="relocalization" id="relocalization">
+                                    <option value="n/a">Are you open to relocalization? </option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>                    
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <input type="email" name="email" id="email" placeholder="Please enter your email"> 
+                            </div>
+                            <div>
+                                <!-- <input type="tel" name="phoneNumber" id="phoneNumber" placeholder="(888) 888-8888" pattern="(\[0-9]{3})\ [0-9]{3}-[0-9]{4}" required> -->
+                                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="(123) 435-6278" pattern="(\[0-9]{3})\ [0-9]{3}-[0-9]{4}" required> 
+                                <small>Format: 123-758-6278</small>
+                            </div>
+                            <div>
+                                <input type="submit" value="Add contact">
+                            </div>
+                        </fieldset>
+                        
+                    </form>
+                
+                </div>
+            <!--  End  -->
+
+            <!-- Start -->
+                <div class="formContainer">
+                    <form action="/personalLink" method="post" id="socioForm">
+
+                        <fieldset >
+                            <legend>Professional links (LinkedIn, GitHub etc.)</legend>
+                            <div class="flexHead">
+                                <div>
+                                    <input type="text" name="pidSocio" id="pidSocio">
+                                </div>
+                                <div>
+                                    <input type="text" name="media_id" id="media_id">
+                                </div>                               
+                            </div>
+                            
+                            <div>
+                            
+                                <select name="socioName" id="socioName">
+                                    <option value="N/A">Please choose a socio media</option>
+                                    <option value="L">LinkedIn</option>
+                                    <option value="G">GitHub</option>
+                                    <option value="I">Instagram</option>
+                                    <option value="Y">YouTube</option>
+                                    <option value="P">Portfolio</option>
+                                  </select>
+                            </div>
+                            <div>
+                                <input type="text" name="url" id="url" placeholder="Please enter your url"> 
+                            </div>
+                            <div>
+                                <input type="submit" value="Add link" id="submit_link">
+                            </div>
+                        </fieldset>
+                
+                    </form>
+                </div>
+            <!--  End  -->
+
+            
+        </div>
+        <!-- end -->
+        <!-- start -->
+        <div class="flex-container">
+            <!-- Start -->
+                <div class="formContainerExcep">                    
+                    <form action="/resObjective" method="post" id="resObjective">
+
+                        <fieldset>
+                            <legend>Resume objective</legend>
+                            <div class="flexHead">
+                                <div>
+                                    <input type="text" name="objective_id" id="objective_id">
+                                </div>
+                                <div>
+                                    <input type="text" name="pidObjective" id="pidObjective">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <textarea name="objective" id="objective" cols="30" rows="10" placeholder="please enter your objective here"></textarea>
+                            </div>
+                            <div>
+                                <input type="submit" value="Add objective">
+                            </div>
+                        </fieldset>
+
+                    </form>                
+                </div>
+            <!--  End  -->                  
+            
+        </div>
+        <!-- end -->
+        <div class="flex-container">
+            <!-- Start -->
+                <div class="formContainer">
+                    <form action="/techSkills" method="post" id="techSkillsForm">        
+                        <fieldset >
+                            <legend>List all your Technical Skills</legend>
+                            <div class="flexHead">
+                                <div>
+                                    <input type="text" name="tech_id" id="tech_id">
+                                </div>
+                                <div>
+                                    <input type="text" name="pidTech" id="pidTech">
+                                </div>
+                            </div>
+                            <div>
+                                <input type="integer" name="tech_num" id="tech_num" >
+                            </div>
+                            <div>
+                                <input type="text" name="technicalSkills" id="technicalSkills" placeholder="Please list your technical skills"> 
+                            </div>
+                            <div>
+                                <input type="submit" value="Add tech skills" id="submit_tech">
+                            </div>
+                            
+                        </fieldset>
+                    </form>
+                
+                </div>
+            <!--  End  -->
+
+            <!-- Start -->
+                <div class="formContainer">
+                    <form action="/marketSkills" method="post" id="marketSkillsForm">
+    
+                        <fieldset >
+                            <legend>List all your Marketable Skills</legend>
+                            <div class="flexHead">
+                                <div>
+                                    <input type="text" name="market_id" id="market_id">
+                                </div>
+                                <div>
+                                    <input type="text" name="pidMarket" id="pidMarket">
+                                </div>
+                            </div>
+                            <div>
+                                <input type="integer" name="marketNum" id="marketNum" >
+                            </div>
+                            <div>
+                                <input type="text" name="marketableSkills" id="marketableSkills" placeholder="Please list your marketable kills"> 
+                            </div>
+                            <div>
+                                <input type="submit" value="Add market skills" id="submit_market">
+                            </div>                            
+                        </fieldset>
+                    </form>
+                </div>
+            <!--  End  -->
+            
+        </div>  
+
+        <div class="flex-container">
+            <!-- Start -->
+                <div class="formContainer">
+                    <form action="/projects" method="post" id="projectsForm">
+                        <fieldset>
+                            <legend>Technical Project Highlights</legend>
+                            <div class="flexHead">
+                                <div>
+                                    <input type="text" name="project_id" id="project_id" >
+                                </div>
+                                <div>
+                                    <input type="text" name="pidProject" id="pidProject" >
+                                </div>
+                            </div>
+                            <div>
+                                <input type="text" name="project_num" id="project_num" >
+                            </div>
+                            <div>
+                                <input type="text" name="projectRole" id="projectRole" placeholder="Please enter your role in that project"> 
+                            </div>
+                            <div>
+                                <input type="text" name="projectName" id="projectName" placeholder="Please enter the name of the project "> 
+                            </div>
+                            <div>
+                                <input type="text" name="projectLanguage" id="projectLanguage" placeholder="Please list languages used in that project"> 
+                            </div>
+                            <div>
+                                <input type="text" name="projectNonthStart" id="projectNonthStart" placeholder="Please starting month of the project"> 
+                            </div>
+                            <div>
+                                <input type="text" name="projectYearStart" id="projectYearStart" placeholder="Please starting year of the project"> 
+                            </div>
+                            <div>
+                                <input type="text" name="projectNonthEnd" id="projectNonthEnd" placeholder="Please ending month of the project"> 
+                            </div>
+                            <div>
+                                <input type="text" name="projectYearEnd" id="projectYearEnd" placeholder="Please ending month of the project"> 
+                            </div>
+                            <div>
+                                <input type="url" name="projectUrl" id="projectUrl" placeholder="Please enter project url"> 
+                            </div>
+                            <div>
+                                <input type="text" name="project_achievementOne" id="project_achievementOne" placeholder="Please enter project highlights 1"> 
+                            </div>
+                            <div>
+                                <input type="text" name="project_achievementTwo" id="project_achievementTwo" placeholder="Please enter project highlights 2"> 
+                            </div>
+                            <div>
+                                <input type="text" name="project_achievementThree" id="project_achievementThree" placeholder="Please enter project highlights 3"> 
+                            </div>
+                            <div>
+                                <input type="submit" value="Add projects" id="submit_project">
+                            </div>
+                        </fieldset>                
+                    </form>
+                
+                </div>
+            <!--  End  -->
+
+            <!-- Start -->
+                <div class="formContainer">
+                    <form action="/work" method="post" id="workForm">
+                        <fieldset>
+                            <legend>Work Experience</legend>
+                            <div class="flexHead">
+                                <div>
+                                    <input type="text" name="work_id" id="work_id">
+                                </div>
+                                <div>
+                                    <input type="text" name="pIdWork" id="pIdWork">
+                                </div>
+                            </div>
+                            <div>
+                                <input type="integer" name="work_num" id="work_num" >
+                            </div>
+                            <div>
+                                <input type="text" name="companyName" id="companyName" placeholder="Please enter your company"> 
+                            </div>
+                            <div>
+                                <input type="text" name="companyCity" id="companyCity" placeholder="Please enter city of your company"> 
+                            </div>
+                            <div>
+                                <input type="text" name="companyState" id="companyState" placeholder="Please enter state of your company "> 
+                            </div>
+                            <div>
+                                <input type="text" name="positionInCompany" id="positionInCompany" placeholder="Please enter your position"> 
+                            </div>
+                            <div>
+                                <input type="text" name="companyStartMonth" id="companyStartMonth" placeholder="Please start Month">
+                            </div> 
+                            <div>
+                                <input type="text" name="companyStartYear" id="companyStartYear" placeholder="Please start year"> 
+                            </div>
+                            <div>
+                                <input type="checkbox" id="stillWorkThere" name="stillWorkThere" value="Y">
+                                <label for="stillWorkThere"> Are you still working there?</label><br>
+                            </div>
+                            <div>
+                                <input type="text" name="companyEndMonth" id="companyEndMonth" placeholder="Please end month">
+                            </div> 
+                            <div>
+                                <input type="text" name="companyEndYear" id="companyEndYear" placeholder="Please end year"> 
+                            </div>
+
+                            <div>
+                                <input type="text" name="realizationInCompanyOne" id="realizationInCompanyOne" placeholder="Please enter your realization"> 
+                            </div>
+                            <div>
+                                <input type="text" name="realizationInCompanyTwo" id="realizationInCompanyTwo" placeholder="Please enter your realization"> 
+                            </div>
+                            <div>
+                                <input type="text" name="realizationInCompanyThree" id="realizationInCompanyThree" placeholder="Please enter your realization"> 
+                            </div>
+                            <div>
+                                <input type="submit" value="Add work" id="submit_work">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            <!--  End  -->
+            
+        </div>  
+
+
+
+
+        <!-- closing  main div -->
+    </div>
+
+    
+ 
+
+    
+        
+   
+    
+
+    
+
+   
+
+   
+
+ 
+    <div>
+        <button type="button" id="GenerateReusme">Generate Resume</button>
+
+    </div> 
+    <!-- <form action="/api/resume" method="post">
         <fieldset>
             <input type="text" name="pId" id="pId" placeholder="enter ID" required>
             <input type="text" name="fName" id="fname" placeholder="enter first name" required>
@@ -18,6 +427,6 @@
             <input type="submit" value="add name">
 
         </fieldset>
-    </form>
+    </form> -->
 </body>
 </html>
