@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <script src="./main.js" defer ></script>
+    <script src="./resume.js" defer ></script>
     <!-- <script src="./resume.js"></script> -->
     <script src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.min.js"></script>
     <title>CV Generator</title>
@@ -209,6 +210,72 @@
             
         </div>
         <!-- end -->
+        <div class="flex-container">
+            <!-- Start -->
+                <div class="formContainerExcep">                    
+                    <form method="post" id="educationForm">
+
+                        <fieldset>
+                            <legend>Education</legend>
+                            <div class="flexHead">
+                                <div>
+                                    <input type="text" name="education_id" id="education_id">
+                                </div>
+                                <div>
+                                    <input type="text" name="pIdEducation" id="pIdEducation">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <input type="text" name="education_number" id="education_number">
+                            </div>
+                            <div>
+                                <input type="text" name="school_name" id="school_name" placeholder="Please enter your school name">
+                            </div>
+                            <div>
+                                <input type="text" name="subject_description" id="subject_description" placeholder="Brief description of the program">
+                            </div>
+                            <div>
+                                <input type="text" name="school_city" id="school_city" placeholder="city of the school">
+                            </div>
+                            <div>
+                                <input type="text" name="school_state" id="school_state" placeholder="State of the school">
+                            </div>
+                            <div>
+                                <label for="school_attendance_method"> School attendance method:</label>
+                                <input type="radio" id="remote" name="school_attendance_method" value="(remote)">
+                                <label for="remote">remote</label>
+                                <input type="radio" id="in_person" name="school_attendance_method" value="(in-person)">
+                                <label for="in_person">in-person</label>
+                            </div>
+                            <div>
+                                <input type="text" name="certificate_title" id="certificate_title" placeholder="certificate name received">
+                            </div>
+                            <div>
+                                <input type="text" name="completion_date_month" id="completion_date_month" placeholder="month of completion">
+                            </div>
+                            <div>
+                                <input type="text" name="completion_date_year" id="completion_date_year" placeholder="completion year">
+                            </div>
+                            <div>
+                                <input type="text" name="achievement_one" id="achievement_one" placeholder="achievement one">
+                            </div>
+                            <div>
+                                <input type="text" name="achievement_two" id="achievement_two" placeholder="achievement two">
+                            </div>
+                            <div>
+                                <input type="text" name="achievement_three" id="achievement_three" placeholder="achievement three">
+                            </div>
+                            <div>
+                                <input type="submit" value="Add objective" id="submit_education">
+                            </div>
+                        </fieldset>
+
+                    </form>                
+                </div>
+            <!--  End  -->                  
+            
+        </div>
         <div class="flex-container">
             <!-- Start -->
                 <div class="formContainer">
@@ -417,16 +484,10 @@
         <button type="button" id="GenerateReusme">Generate Resume</button>
 
     </div> 
-    <!-- <form action="/api/resume" method="post">
-        <fieldset>
-            <input type="text" name="pId" id="pId" placeholder="enter ID" required>
-            <input type="text" name="fName" id="fname" placeholder="enter first name" required>
-            <input type="text" name="mName" id="middlename" placeholder="enter middlename" required>
-            <input type="text" name="lName" id="lastname" placeholder="enter lastname" required>
-            <input type="text" name="cUser" id="createUser" placeholder="enter user" required>
-            <input type="submit" value="add name">
+    
+    </form> 
+    <div class="container">
 
-        </fieldset>
-    </form> -->
+    </div>
 </body>
 </html>

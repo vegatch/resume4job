@@ -20,6 +20,7 @@ const formTitle = document.querySelector('#titleForm')
 const formContact = document.querySelector('#contactForm')
 const formMedia = document.querySelector('#socioForm')
 const formObjective = document.querySelector('#resObjective')
+const formEducation = document.querySelector('#educationForm')
 const formTech = document.querySelector('#techSkillsForm')
 const formMarket = document.querySelector('#marketSkillsForm')
 const formProject = document.querySelector('#projectsForm')
@@ -48,16 +49,6 @@ const techShortId = shortid.generate();
 const marketShortId= shortid.generate();
 const projectShortId = shortid.generate();
 const workShortId = shortid.generate();
-
-
-// let getDataFromBackEnd = function(){
-    
-//     let response = fetch('http://localhost:3000/getResumeData')
-//     .then(response => response.json())    
-//     .then(data => loadToHtml(data['data'])); // new and experimenting
-    
-// }
-// getDataFromBackEnd()
 
 
 // ============================DEFAULT SHORTID VALUE TO PRIMARY KEY
@@ -96,6 +87,13 @@ let workId = document.querySelector('#work_id')
 workId.defaultValue = shortid.generate();;
 workId.readOnly = true;
 
+let educationId = document.querySelector('#education_id')
+educationId.defaultValue = shortid.generate();;
+educationId.readOnly = true;
+
+
+
+// ============================================================
 
 
 // =============== ASSIGNUNG VALUES TO FOREIGN KEYS============
@@ -135,6 +133,9 @@ let personIdWork = document.querySelector('#pIdWork')
 personIdWork.defaultValue = pId.value;
 personIdWork.readOnly = true;
 
+let personIdEducation = document.querySelector('#pIdEducation')
+personIdEducation.defaultValue = pId.value;
+personIdEducation.readOnly = true;
 
 
 
@@ -161,37 +162,20 @@ successMsg.style.display = "none";
 const personForm = document.querySelector("#personForm")
 
 
-// personForm.addEventListener('submit', async (e) => {
-//     e.preventDefault();
-    
-//     const formData = new FormData(personForm);
-//     await postData(personForm)
-
-//     console.log(formData)
-
-    
-
-//   });
-
-// const postData = async (data) => {
-//     await fetch("http://localhost:5555/api/resume",{
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "text/plain"
-//         },
-//         body: data
-//     })
-// } 
-
 
 let titleNum = document.querySelector('#titleNum');
-let link_number = document.querySelector('#linkId');
 let tech_number = document.querySelector('#tech_num');
 let marketNum = document.querySelector('#marketNum');
 let project_number = document.querySelector('#project_num');
 let work_number = document.querySelector('#work_num');
+let educationNumber = document.querySelector('#education_number');
 
 titleNum.readOnly = true;
+tech_number.readOnly = true;
+marketNum.readOnly = true;
+project_number.readOnly = true;
+work_number.readOnly = true;
+educationNumber.readOnly = true;
 
 
 // titleNum.defaultValue = 0;
@@ -240,6 +224,13 @@ companyNameInput.addEventListener('input', () =>{
 })
 
 
+let school_nameInput = document.querySelector('#school_name')
+school_nameInput.addEventListener('input', () =>{       
+    if(isNaN(educationNumber)){
+        educationNumber.defaultValue = 0;
+    }
+})
+
 
 // ================================================================================
 // let urlnameInput = document.querySelector('#urlname')
@@ -260,14 +251,16 @@ let tech_submit = document.querySelector('#submit_tech')
 let market_submit = document.querySelector('#submit_market')
 let project_submit = document.querySelector('#submit_project')
 let work_submit = document.querySelector('#submit_work')
+let education_submit = document.querySelector('#submit_education')
 
 // let titleNumInput = document.querySelector('#titleNum')
 
-
+title_submit.addEventListener('click', () =>{addOne(titleNum)})
 tech_submit.addEventListener('click', () =>{addOne(tech_number)})
 market_submit.addEventListener('click', () =>{addOne(marketNum)})
 project_submit.addEventListener('click', () =>{addOne(project_number)})
 work_submit.addEventListener('click', () =>{addOne(work_number)})
+education_submit.addEventListener('click', () =>{addOne(educationNumber)})
 
 
 // ============================================================================
@@ -281,10 +274,19 @@ const techUrl = '/api/tech'
 const marketUrl = '/api/market'
 const projectUrl = '/api/project'
 const workUrl = '/api/work'
+const educationUrl = '/api/education'
 
 // =================================================================
 
 
+
+// ==================== clear radion Button and CheckBox ===========
+
+let clearRadio = function(myName){
+const radioElement = document.getElementsByName(myName);
+   for(let i=0; i < radioElement.length; i++)
+   return radioElement[i].checked = false;
+}
 
 
 
@@ -552,7 +554,8 @@ formWork.addEventListener('submit', (e) =>{
     document.querySelector("#companyState").value ='';
     document.querySelector("#positionInCompany").value ='';
     document.querySelector("#companyStartMonth").value ='';
-    document.querySelector("#companyStartYear").value ='';
+    document.querySelector("#companyStartYear").checked =false;
+    document.querySelector("#stillWorkThere").value ='';
     document.querySelector("#companyEndMonth").value ='';
     document.querySelector("#companyEndYear").value ='';
     document.querySelector("#realizationInCompanyOne").value ='';
@@ -560,6 +563,46 @@ formWork.addEventListener('submit', (e) =>{
     document.querySelector("#realizationInCompanyThree").value ='';    
 
 })
+
+
+
+//========================= EDUCATION
+formEducation.addEventListener('submit', (e) =>{
+    e.preventDefault();
+
+    const formData = new FormData(formEducation);
+
+    const searchParams = new URLSearchParams();
+    for(const pair of formData){
+        searchParams.append(pair[0], pair[1])
+    }
+    
+    fetch(educationUrl, {
+        method: "POST",
+        body: searchParams
+    })
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(error => console.log(error))
+    // document.querySelector('#objective_id').defaultValue = generateString(12);
+    
+    document.querySelector('#education_id').defaultValue = shortid.generate();
+    document.querySelector("#school_name").value ='';
+    document.querySelector("#subject_description").value ='';
+    document.querySelector("#school_city").value ='';
+    document.querySelector("#school_state").value ='';
+    // document.querySelector("[name='school_attendance_method']").value = clearRadio("school_attendance_method");
+    document.querySelector("#remote").checked = false;
+    document.querySelector("#in_person").checked = false;
+    document.querySelector("#certificate_title").value ='';
+    document.querySelector("#completion_date_month").value ='';
+    document.querySelector("#completion_date_year").value ='';
+    document.querySelector("#achievement_one").value ='';
+    document.querySelector("#achievement_two").value ='';
+    document.querySelector("#achievement_three").value ='';    
+
+})
+
 
 
 
@@ -590,3 +633,36 @@ fetch(states)
 
 
 // console.log(myCountry)
+
+
+// =========================== get data
+
+// let getDataFromBackEnd = async function(){
+    
+//     fetch('http://localhost:5555/api/allresume')
+//     .then(res => res.json())
+//     .then(data => console.log(data))
+//     .then(data => loadToHtml(data))
+
+
+// }
+// getDataFromBackEnd()
+
+
+async function renderToHtml() {
+    const response = await fetch('http://localhost:5555/api/allresume');
+    const data = await response.json();
+    
+    console.log(data)
+    loadToHtml(data)
+    // document.querySelector('.container').innerHTML = data[0].fullname;
+
+  }
+  
+  renderToHtml();
+
+// let loadToHtml = async function(data){
+//     data.foreach
+// }
+
+

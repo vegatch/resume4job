@@ -20,10 +20,10 @@ app
     .use(express.json())
     .use(express.urlencoded({ extended: true}))
 
-    .get('/api/allresume',  (req, res) => {     
+    .get('/api/allresume', async (req, res) => {     
       let sqlQuery = "SELECT * FROM resumedb.complete_resume";
   
-      connection.query(sqlQuery, (err, results) => {
+      await connection.query(sqlQuery, (err, results) => {
         if(err) throw err;
         res.send((results));
       });
@@ -122,8 +122,8 @@ app
     socioName_ = body.socioName, 
     url_ = body.url,     
     createUser = `sba`
-    
-   if(req.body.length === 0) throw err;
+   try{
+    if(req.body.length === 0) throw err;
 
     var sql = `INSERT INTO  resumedb.person_media(media_id, person_id, media_name, media_url, create_user) 
     VALUES ("${mediaId}", "${personId}", "${socioName_}", "${url_}",  "${createUser}")`;
@@ -133,6 +133,14 @@ app
     //   req.flash('success', 'Data added successfully!');
     // res.redirect('/');
     });
+
+   }    
+   catch(error){
+      res.send(error)
+   }finally{
+      connection.end;
+   } 
+   
 
  })
 
@@ -147,17 +155,26 @@ app
       objective_ = body.objective,     
       createUser = `sba`
   
-      if(req.body.length === 0) throw err;
+      try{
 
-      var sql = `INSERT INTO  resumedb.person_resume_objective(objective_id, person_id, objective_details,  create_user) 
-      VALUES ("${objectiveId}", "${personId}", "${objective_}",  "${createUser}")`;
-      connection.query(sql, function(err, result) {
-        if (err) throw err;
-        console.log('record inserted');
-      //   req.flash('success', 'Data added successfully!');
-      // res.redirect('/');
-      });
+        if(req.body.length === 0) throw err;
 
+        var sql = `INSERT INTO  resumedb.person_resume_objective(objective_id, person_id, objective_details,  create_user) 
+        VALUES ("${objectiveId}", "${personId}", "${objective_}",  "${createUser}")`;
+        connection.query(sql, function(err, result) {
+          if (err) throw err;
+          console.log('record inserted');
+        //   req.flash('success', 'Data added successfully!');
+        // res.redirect('/');
+        });
+  
+
+      }catch(error){
+        
+      }finally{
+        connection.end
+      }
+     
     })
 
 
@@ -171,18 +188,27 @@ app
       techNum = body.tech_num,   
       techSkills = body.technicalSkills,  
       createUser = `sba`
+      
+
+      try{
+
+        if(req.body.length === 0) throw err;
+
+        var sql = `INSERT INTO  resumedb.person_skills_tech(tech_skill_id, person_id, tech_skills_number, skill_tech, create_user) 
+        VALUES ("${techId}", "${personId}", "${techNum}", "${techSkills}", "${createUser}")`;
+        connection.query(sql, function(err, result) {
+          if (err) throw err;
+          console.log('record inserted');
+        //   req.flash('success', 'Data added successfully!');
+        // res.redirect('/');
+        });
   
-      if(req.body.length === 0) throw err;
-
-      var sql = `INSERT INTO  resumedb.person_skills_tech(tech_skill_id, person_id, tech_skills_number, skill_tech, create_user) 
-      VALUES ("${techId}", "${personId}", "${techNum}", "${techSkills}", "${createUser}")`;
-      connection.query(sql, function(err, result) {
-        if (err) throw err;
-        console.log('record inserted');
-      //   req.flash('success', 'Data added successfully!');
-      // res.redirect('/');
-      });
-
+      }catch(error){
+        res.send(error)
+      }finally{
+        connection.end
+      }
+      
     })
 
 
@@ -196,18 +222,27 @@ app
       marketNum = body.marketNum,   
       marketSkills = body.marketableSkills,  
       createUser = `sba`
+      
+
+      try{
+
+        if(req.body.length === 0) throw err;
+
+        var sql = `INSERT INTO  resumedb.person_skills_market(market_skill_id, person_id, market_skills_number, skill_market, create_user) 
+        VALUES ("${marketId}", "${personId}", "${marketNum}", "${marketSkills}", "${createUser}")`;
+        connection.query(sql, function(err, result) {
+          if (err) throw err;
+          console.log('record inserted');
+        //   req.flash('success', 'Data added successfully!');
+        // res.redirect('/');
+        });
   
-      if(req.body.length === 0) throw err;
-
-      var sql = `INSERT INTO  resumedb.person_skills_market(market_skill_id, person_id, market_skills_number, skill_market, create_user) 
-      VALUES ("${marketId}", "${personId}", "${marketNum}", "${marketSkills}", "${createUser}")`;
-      connection.query(sql, function(err, result) {
-        if (err) throw err;
-        console.log('record inserted');
-      //   req.flash('success', 'Data added successfully!');
-      // res.redirect('/');
-      });
-
+      }catch(error){
+        res,send(error)
+      }finally{
+        connection.end
+      }
+      
     })
 
 
@@ -307,6 +342,55 @@ app
       }
       
     })
+
+
+    .post('/api/education', async(req, res) =>{       
+
+      try{
+
+        const body = req.body;
+        console.log(req.body)
+
+        educationId = body.education_id,
+        personId = body.pIdEducation, 
+        educationNum = body.education_number,   
+        school_name_ = body.school_name,  
+        subject_description_ = body.subject_description,
+        school_city_ = body.school_city, 
+        school_state_ = body.school_state,   
+        school_attendance_method_ = body.school_attendance_method,
+        certificate_title_ = body.certificate_title,
+        completion_date_month_ = body.completion_date_month,
+        completion_date_year_ = body.completion_date_year, 
+        achievement_one_ = body.achievement_one,   
+        achievement_two_ = body.achievement_two,
+        achievement_three_ = body.achievement_three,   
+        // realizationInCompanyThree_ = body.realizationInCompanyThree,
+        createUser = `sba`
+  
+      if(req.body.length === 0) throw err;
+
+      var sql = await `INSERT INTO resumedb.person_education(education_id, person_id, education_number, school_name, subject_description, school_city, school_state, school_attendance_method,  certificate_title, completion_date_month, completion_date_year, achievement_one, achievement_two, achievement_three, create_user) 
+      VALUES ("${educationId}", "${personId}", "${educationNum}", "${school_name_}", "${subject_description_}", "${school_city_}", "${school_state_}", "${school_attendance_method_}", "${certificate_title_}", "${completion_date_month_}","${completion_date_year_}", "${achievement_one_}",  "${achievement_two_}", "${achievement_three_}", "${createUser}")`;
+       await connection.query(sql, function(err, result) {
+        if (err) throw err;
+        console.log('record inserted');
+      //   req.flash('success', 'Data added successfully!');
+      // res.redirect('/');
+      });
+
+
+      }catch(err){
+
+        res.send(err)
+
+      }finally{
+        connection.end
+      }
+      
+    })
+
+
 
     .listen(port, () => console.log(`Server listening on port ${port}`));
 
